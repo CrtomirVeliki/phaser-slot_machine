@@ -45,9 +45,10 @@ class SlotMachineScene extends Phaser.Scene {
         this.mask.fillStyle(0xffffff);
         this.mask.fillRect(
             centerX - (this.symbolSize * this.reelWidth) / 2 - this.gap -5,
-            centerY - (this.symbolSize * (this.reelHeight - 1)) / 2,
+            centerY - (this.symbolSize * (this.reelHeight - 0.9)) / 2,
             this.symbolSize * this.reelWidth + this.gap + 30,
-            this.symbolSize * (this.reelHeight - 1)
+            this.symbolSize * (this.reelHeight -0.9
+            )
         );
 
         // displayedSymbols 2D array
