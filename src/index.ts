@@ -191,7 +191,7 @@ class SlotMachineScene extends Phaser.Scene {
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.WEBGL,
-    width: 800,
+    width: 600,
     height: 600,
     scene: SlotMachineScene,
 };
