@@ -1,3 +1,6 @@
+import Phaser from "phaser";
+
+
 class SlotMachineScene extends Phaser.Scene {
 
     private reels: Phaser.GameObjects.Container[] = [];
