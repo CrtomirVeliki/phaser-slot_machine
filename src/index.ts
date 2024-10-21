@@ -7,6 +7,7 @@ class SlotMachineScene extends Phaser.Scene {
     private symbols: string[] = ['symbol1', 'symbol2', 'symbol3', 'symbol4', 'symbol5'];
     private displayedSymbols: string[][] = []; 
 
+    private gap: number = 30;
     private reelHeight: number = 4;   
     private symbolSize: number = 75;  
     private reelWidth: number = 3;   
@@ -25,25 +26,27 @@ class SlotMachineScene extends Phaser.Scene {
     }
 
     preload() {
-    
-        this.load.image('symbol1', './images/sedem.png');
-        this.load.image('symbol2', './images/banana.png');
-        this.load.image('symbol3', './images/lubenica.png');
-        this.load.image('symbol4', './images/limona.png');
-        this.load.image('symbol5', './images/bar.png');
+        this.load.image('background', './images/background.jpg')
+        this.load.image('symbol1', './images/sedem1.png');
+        this.load.image('symbol2', './images/banana1.png');
+        this.load.image('symbol3', './images/lubenica1.png');
+        this.load.image('symbol4', './images/limona1.png');
+        this.load.image('symbol5', './images/bar1.png');
     }
 
     create() {
+        
         const centerX = this.cameras.main.centerX;
         const centerY = this.cameras.main.centerY;
-
+        const bg = this.add.image(centerX, centerY + this.reelHeight +2, 'background');
+        bg.scale = 0.99;
         //create static mask
         this.mask = this.make.graphics({});
         this.mask.fillStyle(0xffffff);
         this.mask.fillRect(
-            centerX - (this.symbolSize * this.reelWidth) / 2,
+            centerX - (this.symbolSize * this.reelWidth) / 2 - this.gap -5,
             centerY - (this.symbolSize * (this.reelHeight - 1)) / 2,
-            this.symbolSize * this.reelWidth,
+            this.symbolSize * this.reelWidth + this.gap + 30,
             this.symbolSize * (this.reelHeight - 1)
         );
 
@@ -53,9 +56,10 @@ class SlotMachineScene extends Phaser.Scene {
         }
 
         // create reels, fill with symbols
+        
         for (let x = 0; x < this.reelWidth; x++) {
             const reelContainer = this.add.container(
-                centerX - (this.reelWidth / 2 - x) * this.symbolSize + 38,
+                centerX - (this.reelWidth / 2 - x) * (this.symbolSize + this.gap) +50,
                 centerY - (this.symbolSize * this.reelHeight) / 2
             );
 
@@ -80,9 +84,10 @@ class SlotMachineScene extends Phaser.Scene {
             reel.setMask(staticMask);
         });
 
+        
+
         this.spinButton = this.add.text(centerX, centerY + 200, 'Spin', {
             fontSize: '32px',
-            backgroundColor: '#000',
             color: '#fff',
             padding: { x: 10, y: 10 },
         }).setInteractive({ useHandCursor: true }) 
